@@ -7,30 +7,39 @@ import {
   faMedium,
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
-import { Box, HStack } from "@chakra-ui/react";
+import { Box, HStack, Stack } from "@chakra-ui/react";
 
 const socials = [
   {
     icon: faEnvelope,
-    url: "mailto: hello@example.com",
+    url: "mailto:hello@example.com",
+    label: "Email",
   },
   {
     icon: faGithub,
     url: "https://github.com",
+    label: "GitHub",
   },
   {
     icon: faLinkedin,
     url: "https://www.linkedin.com",
+    label: "LinkedIn",
   },
   {
     icon: faMedium,
     url: "https://medium.com",
+    label: "Medium",
   },
   {
     icon: faStackOverflow,
     url: "https://stackoverflow.com",
+    label: "Stack Overflow",
   },
 ];
+
+const touchTargetStyles = {
+  WebkitTapHighlightColor: "transparent",
+};
 
 const Header = () => {
   const headerRef = useRef(null);
@@ -87,41 +96,71 @@ const Header = () => {
       transitionTimingFunction="ease-in-out"
       backgroundColor="#18181b"
     >
-      <Box color="white" maxWidth="1280px" margin="0 auto">
-        <HStack
-          spacing={6}
-          px={16}
-          py={4}
+      <Box color="white" maxWidth="1280px" margin="0 auto" width="100%">
+        <Stack
+          direction={{ base: "column", md: "row" }}
+          spacing={{ base: 3, md: 6 }}
+          px={{ base: 3, sm: 4, md: 10, lg: 16 }}
+          py={{ base: 3, md: 4 }}
           justifyContent="space-between"
           alignItems="center"
         >
-          <nav>
-            <HStack spacing={6}>
-              <a href="mailto: hello@example.com">
-                <FontAwesomeIcon icon={faEnvelope} size="2x" />
-              </a>
-
-              <a href="https://github.com">
-                <FontAwesomeIcon icon={faGithub} size="2x" />
-              </a>
-
-              <a href="https://www.linkedin.com">
-                <FontAwesomeIcon icon={faLinkedin} size="2x" />
-              </a>
-
-              <a href="https://medium.com">
-                <FontAwesomeIcon icon={faMedium} size="2x" />
-              </a>
-
-              <a href="https://stackoverflow.com">
-                <FontAwesomeIcon icon={faStackOverflow} size="2x" />
-              </a>    
+          <Box as="nav" width={{ base: "100%", md: "auto" }} display="flex" justifyContent="center">
+            <HStack spacing={{ base: 2, sm: 3, md: 6 }} flexWrap="wrap" justifyContent="center">
+              {socials.map((social) => (
+                <Box
+                  key={social.label}
+                  as="a"
+                  href={social.url}
+                  aria-label={social.label}
+                  color="inherit"
+                  display="inline-flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  fontSize={{ base: "1.9rem", md: "2rem" }}
+                  lineHeight="1"
+                  p={{ base: 1, md: 0 }}
+                  borderRadius="md"
+                  transition="color 0.18s ease, transform 0.18s ease"
+                  sx={touchTargetStyles}
+                  _hover={{ color: "blue.200" }}
+                  _active={{ color: "blue.200", transform: "scale(0.96)" }}
+                  _focus={{ boxShadow: "none" }}
+                  _focusVisible={{
+                    outline: "2px solid",
+                    outlineColor: "whiteAlpha.700",
+                    outlineOffset: "2px",
+                  }}
+                >
+                  <FontAwesomeIcon icon={social.icon} />
+                </Box>
+              ))}
             </HStack>
-          </nav>
-          <nav>
-            <HStack spacing={8}>
-              <a
+          </Box>
+          <Box as="nav" width={{ base: "100%", md: "auto" }} display="flex" justifyContent="center">
+            <HStack spacing={{ base: 3, md: 8 }} flexWrap="wrap" justifyContent="center">
+              <Box
+                as="a"
                 href="/#projects"
+                color="inherit"
+                textDecoration="none"
+                display="inline-flex"
+                alignItems="center"
+                fontSize={{ base: "1rem", md: "inherit" }}
+                fontWeight={{ base: "600", md: "inherit" }}
+                px={{ base: 3, md: 0 }}
+                py={{ base: 1.5, md: 0 }}
+                borderRadius="full"
+                transition="color 0.18s ease, transform 0.18s ease"
+                sx={touchTargetStyles}
+                _hover={{ color: "blue.200" }}
+                _active={{ color: "blue.200", transform: "translateY(1px)" }}
+                _focus={{ boxShadow: "none" }}
+                _focusVisible={{
+                  outline: "2px solid",
+                  outlineColor: "whiteAlpha.700",
+                  outlineOffset: "2px",
+                }}
                 onClick={(e) => {
                   e.preventDefault();
                   window.history.pushState(null, "", "/#projects");
@@ -129,10 +168,30 @@ const Header = () => {
                 }}
               >
                 Projects
-              </a>
+              </Box>
 
-              <a
+              <Box
+                as="a"
                 href="/#contact-me"
+                color="inherit"
+                textDecoration="none"
+                display="inline-flex"
+                alignItems="center"
+                fontSize={{ base: "1rem", md: "inherit" }}
+                fontWeight={{ base: "600", md: "inherit" }}
+                px={{ base: 3, md: 0 }}
+                py={{ base: 1.5, md: 0 }}
+                borderRadius="full"
+                transition="color 0.18s ease, transform 0.18s ease"
+                sx={touchTargetStyles}
+                _hover={{ color: "blue.200" }}
+                _active={{ color: "blue.200", transform: "translateY(1px)" }}
+                _focus={{ boxShadow: "none" }}
+                _focusVisible={{
+                  outline: "2px solid",
+                  outlineColor: "whiteAlpha.700",
+                  outlineOffset: "2px",
+                }}
                 onClick={(e) => {
                   e.preventDefault();
                   window.history.pushState(null, "", "/#contact-me");
@@ -140,10 +199,10 @@ const Header = () => {
                 }}
               >
                 Contact Me
-              </a>
+              </Box>
             </HStack>
-          </nav>
-        </HStack>
+          </Box>
+        </Stack>
       </Box>
     </Box>
   );

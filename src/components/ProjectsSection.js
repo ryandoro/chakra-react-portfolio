@@ -35,7 +35,7 @@ const ProjectsSection = () => {
     <FullScreenSection
       backgroundColor="#14532d"
       isDarkBackground
-      p={8}
+      p={{ base: 4, md: 8 }}
       alignItems="flex-start"
       spacing={8}
     >
@@ -44,7 +44,8 @@ const ProjectsSection = () => {
       </Heading>
       <Box
         display="grid"
-        gridTemplateColumns="repeat(2,minmax(0,1fr))"
+        w="full"
+        gridTemplateColumns={{ base: "minmax(0,1fr)", md: "repeat(2,minmax(0,1fr))" }}
         gridGap={8}
       >
         {projects.map((project) => (
